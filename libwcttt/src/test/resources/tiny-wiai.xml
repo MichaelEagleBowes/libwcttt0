@@ -1,0 +1,958 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<semester name="tiny-wiai" daysPerWeek="5" timeSlotsPerDay="6" maxDailyLecturesPerCur="4">
+    <constrWeightings s1="0.01" s2="1.0" s3="1.0" s4="1.0" s5="1.0" s6="1.0" s7="1.0"/>
+    <chairs>
+        <chair id="swt" name="Lehrstuhl Softwaretechnik und Programmiersprachen" abbreviation="SWT">
+            <teachers>
+                <teacher id="lüttgen" name="Prof. Dr. Gerald Lüttgen">
+                    <unfavorablePeriods>
+                        <unfavorable day="1" timeSlot="1"/>
+                        <unfavorable day="1" timeSlot="2"/>
+                        <unfavorable day="1" timeSlot="3"/>
+                    </unfavorablePeriods>
+                    <unavailablePeriods>
+                        <unavailable day="2" timeSlot="4"/>
+                        <unavailable day="2" timeSlot="5"/>
+                        <unavailable day="2" timeSlot="6"/>
+                    </unavailablePeriods>
+                </teacher>
+                <teacher id="yip" name="Dr. Eugene Yip">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods/>
+                </teacher>
+                <teacher id="gareis" name="Johannes Gareis">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods/>
+                </teacher>
+            </teachers>
+        </chair>
+        <chair id="dsg" name="Lehrstuhl für Praktische Informatik" abbreviation="DSG">
+            <teachers>
+                <teacher id="wirtz" name="Prof. Dr. Guido Wirtz">
+                    <unfavorablePeriods>
+                        <unfavorable day="1" timeSlot="3"/>
+                        <unfavorable day="1" timeSlot="4"/>
+                        <unfavorable day="1" timeSlot="5"/>
+                    </unfavorablePeriods>
+                    <unavailablePeriods/>
+                </teacher>
+                <teacher id="dsg-hiwi1" name="DSG HiWi 1">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods/>
+                </teacher>
+                <teacher id="dsg-hiwi2" name="DSG HiWi 2">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods/>
+                </teacher>
+                <teacher id="dsg-hiwi3" name="DSG HiWi 3">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods/>
+                </teacher>
+                <teacher id="dsg-hiwi4" name="DSG HiWi 4">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods/>
+                </teacher>
+            </teachers>
+        </chair>
+        <chair id="gdi" name="Professur für Grundlagen der Informatik" abbreviation="GDI">
+            <teachers>
+                <teacher id="mendler" name="Prof. Michael Mendler, PhD">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods>
+                        <unavailable day="5" timeSlot="1"/>
+                        <unavailable day="5" timeSlot="2"/>
+                        <unavailable day="5" timeSlot="3"/>
+                        <unavailable day="5" timeSlot="4"/>
+                        <unavailable day="5" timeSlot="5"/>
+                        <unavailable day="5" timeSlot="6"/>
+                    </unavailablePeriods>
+                </teacher>
+                <teacher id="guatto" name="Dr. Adrien Guatto">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods/>
+                </teacher>
+            </teachers>
+        </chair>
+        <chair id="ktr" name="Professur für Informatik, insbesondere Kommunikationsdienste, Telekommunikationssysteme und Rechnernetze" abbreviation="KTR">
+            <teachers>
+                <teacher id="krieger" name="Prof. Dr. Udo R. Krieger">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods>
+                        <unavailable day="4" timeSlot="1"/>
+                        <unavailable day="4" timeSlot="2"/>
+                        <unavailable day="4" timeSlot="3"/>
+                        <unavailable day="4" timeSlot="4"/>
+                        <unavailable day="4" timeSlot="5"/>
+                        <unavailable day="4" timeSlot="6"/>
+                    </unavailablePeriods>
+                </teacher>
+                <teacher id="großmann" name="Dr. Marcel Großmann">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods/>
+                </teacher>
+            </teachers>
+        </chair>
+        <chair id="stat" name="Lehrstuhl für Statistik und Ökonometrie" abbreviation="Stat">
+            <teachers>
+                <teacher id="rässler" name="Prof. Dr. Susanne Rässler">
+                    <unfavorablePeriods/>
+                    <unavailablePeriods/>
+                </teacher>
+            </teachers>
+        </chair>
+    </chairs>
+    <internalRooms>
+        <internalRoom id="r1" name="WE5/00.019" capacity="156">
+            <features projectors="2" pcPool="false" teacherPc="true" docCam="true"/>
+        </internalRoom>
+        <internalRoom id="r2" name="WE5/00.022" capacity="241">
+            <features projectors="2" pcPool="false" teacherPc="true" docCam="true"/>
+        </internalRoom>
+        <internalRoom id="r3" name="WE5/01.003" capacity="35">
+            <features projectors="2" pcPool="true" teacherPc="true" docCam="true"/>
+        </internalRoom>
+        <internalRoom id="r4" name="WE5/01.006" capacity="70">
+            <features projectors="2" pcPool="false" teacherPc="true" docCam="true"/>
+        </internalRoom>
+    </internalRooms>
+    <externalRooms>
+        <externalRoom id="audimax" name="Audimax"/>
+    </externalRooms>
+    <courses>
+        <course id="stat1" name="Methoden der Statistik 1" abbreviation="Stat-B-01" courseLevel="Bachelor" minNumberOfDays="1">
+            <chair>stat</chair>
+            <lectures>
+                <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="externalSession" id="stat1-l1" name="Statistik Lecture" doubleSession="true">
+                    <teacher>rässler</teacher>
+                    <preAssignment day="2" timeSlot="3"/>
+                    <room>audimax</room>
+                </lecture>
+            </lectures>
+            <practicals/>
+        </course>
+        <course id="fse" name="Foundations of Software Engineering" abbreviation="SWT-FSE-B" courseLevel="Bachelor" minNumberOfDays="3">
+            <chair>swt</chair>
+            <lectures>
+                <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="fse-l1" name="FSE Lecture 1" doubleSession="false" students="80">
+                    <teacher>lüttgen</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </lecture>
+                <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="fse-l2" name="FSE Lecture 2" doubleSession="false" students="80">
+                    <teacher>lüttgen</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </lecture>
+                <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="fse-l3" name="FSE Lecture 3" doubleSession="false" students="80">
+                    <teacher>lüttgen</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </lecture>
+            </lectures>
+            <practicals>
+                <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="fse-p1" name="FSE Practical 1" doubleSession="false" students="30">
+                    <teacher>yip</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </practical>
+                <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="fse-p2" name="FSE Practical 2" doubleSession="false" students="30">
+                    <teacher>gareis</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </practical>
+                <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="fse-p3" name="FSE Practical 3" doubleSession="false" students="30">
+                    <teacher>yip</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </practical>
+            </practicals>
+        </course>
+        <course id="eiaps" name="Einführung in Algorithmen, Programmierung und Software" abbreviation="DSG-EiAPS-B" courseLevel="Bachelor" minNumberOfDays="2">
+            <chair>dsg</chair>
+            <lectures>
+                <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eiaps-l1" name="EiAPS Lecture 1" doubleSession="false" students="240">
+                    <teacher>wirtz</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </lecture>
+                <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eiaps-l2" name="EiAPS Lecture 2" doubleSession="false" students="240">
+                    <teacher>wirtz</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </lecture>
+            </lectures>
+            <practicals>
+                <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eiaps-p1" name="EiAPS Practical 1" doubleSession="false" students="35">
+                    <teacher>dsg-hiwi1</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </practical>
+                <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eisp-p2" name="EiAPS Practical 2" doubleSession="false" students="35">
+                    <teacher>dsg-hiwi2</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </practical>
+                <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eisp-p3" name="EiAPS Practical 3" doubleSession="false" students="35">
+                    <teacher>dsg-hiwi3</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </practical>
+                <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eisp-p4" name="EiAPS Practical 4" doubleSession="false" students="35">
+                    <teacher>dsg-hiwi4</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </practical>
+                <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eisp-p5" name="EiAPS Practical 5" doubleSession="false" students="35">
+                    <teacher>dsg-hiwi1</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </practical>
+                <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eisp-p6" name="EiAPS Practical 6" doubleSession="false" students="35">
+                    <teacher>dsg-hiwi2</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </practical>
+                <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eisp-p7" name="EiAPS Practical 7" doubleSession="false" students="35">
+                    <teacher>dsg-hiwi3</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </practical>
+                <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="eisp-p8" name="EiAPS Practical 8" doubleSession="false" students="35">
+                    <teacher>dsg-hiwi4</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </practical>
+            </practicals>
+        </course>
+        <course id="mtl" name="Modal and Temporal Logic" abbreviation="GdI-MTL" courseLevel="Master" minNumberOfDays="2">
+            <chair>gdi</chair>
+            <lectures>
+                <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="mtl-l1" name="MTL Lecture 1" doubleSession="false" students="30">
+                    <teacher>mendler</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </lecture>
+                <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="mtl-l2" name="MTL Lecture 2" doubleSession="false" students="30">
+                    <teacher>mendler</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </lecture>
+            </lectures>
+            <practicals>
+                <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="mtl-p1" name="MTL Practical 1" doubleSession="false" students="20">
+                    <teacher>guatto</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </practical>
+                <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="mtl-p2" name="MTL Practical 2" doubleSession="false" students="20">
+                    <teacher>guatto</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </practical>
+            </practicals>
+        </course>
+        <course id="gik" name="Grundbausteine der Internet-Kommunikation" abbreviation="KTR-GIK-M" courseLevel="Master" minNumberOfDays="2">
+            <chair>ktr</chair>
+            <lectures>
+                <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="gik-l1" name="GIK Lecture 1" doubleSession="false" students="20">
+                    <teacher>krieger</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </lecture>
+                <lecture xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="gik-l2" name="GIK Lecture 2" doubleSession="false" students="20">
+                    <teacher>krieger</teacher>
+                    <roomRequirements projectors="1" pcPool="false" teacherPc="false" docCam="false"/>
+                </lecture>
+            </lectures>
+            <practicals>
+                <practical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="internalSession" id="gik-p1" name="GIK Practical 1" doubleSession="false" students="20">
+                    <teacher>großmann</teacher>
+                    <roomRequirements projectors="1" pcPool="true" teacherPc="false" docCam="false"/>
+                </practical>
+            </practicals>
+        </course>
+    </courses>
+    <curricula>
+        <curriculum id="sosysc-mandatory" name="Software Systems Science - mandatory courses">
+            <courses>
+                <course>fse</course>
+                <course>eiaps</course>
+                <course>stat1</course>
+            </courses>
+        </curriculum>
+        <curriculum id="isosysc-elective" name="International Software Systems Science - elective courses">
+            <courses>
+                <course>mtl</course>
+                <course>gik</course>
+            </courses>
+        </curriculum>
+    </curricula>
+    <timetables>
+        <timetable name="timetable1" softConstraintPenalty="16.900000000000006">
+            <days>
+                <timetableDay day="1">
+                    <periods>
+                        <timetablePeriod day="1" timeSlot="1">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="2">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="3">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="4">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="5">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="6">
+                            <assignments>
+<timetableAssignment>
+    <session>fse-l2</session>
+    <room>r1</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>mtl-p2</session>
+    <room>r3</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+                <timetableDay day="2">
+                    <periods>
+                        <timetablePeriod day="2" timeSlot="1">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="2">
+                            <assignments>
+<timetableAssignment>
+    <session>fse-l3</session>
+    <room>r3</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="3">
+                            <assignments>
+<timetableAssignment>
+    <session>stat1-l1</session>
+    <room>audimax</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>mtl-l1</session>
+    <room>r1</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="4">
+                            <assignments>
+<timetableAssignment>
+    <session>stat1-l1</session>
+    <room>audimax</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="5">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p3</session>
+    <room>r3</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="6">
+                            <assignments>
+<timetableAssignment>
+    <session>eiaps-l2</session>
+    <room>r1</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>gik-p1</session>
+    <room>r3</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+                <timetableDay day="3">
+                    <periods>
+                        <timetablePeriod day="3" timeSlot="1">
+                            <assignments>
+<timetableAssignment>
+    <session>eiaps-l1</session>
+    <room>r2</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>mtl-p1</session>
+    <room>r4</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="2">
+                            <assignments>
+<timetableAssignment>
+    <session>fse-l1</session>
+    <room>r1</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>gik-l2</session>
+    <room>r3</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="3">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="4">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p4</session>
+    <room>r3</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>mtl-l2</session>
+    <room>r1</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="5">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p7</session>
+    <room>r4</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>gik-l1</session>
+    <room>r1</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="6">
+                            <assignments/>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+                <timetableDay day="4">
+                    <periods>
+                        <timetablePeriod day="4" timeSlot="1">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p6</session>
+    <room>r3</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>fse-p2</session>
+    <room>r4</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="2">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p8</session>
+    <room>r4</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="3">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="4">
+                            <assignments>
+<timetableAssignment>
+    <session>fse-p1</session>
+    <room>r3</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>eiaps-p1</session>
+    <room>r4</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="5">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="6">
+                            <assignments/>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+                <timetableDay day="5">
+                    <periods>
+                        <timetablePeriod day="5" timeSlot="1">
+                            <assignments>
+<timetableAssignment>
+    <session>fse-p3</session>
+    <room>r4</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>eisp-p5</session>
+    <room>r3</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="2">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="3">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="4">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p2</session>
+    <room>r4</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="5">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="6">
+                            <assignments/>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+            </days>
+        </timetable>
+        <timetable name="timetable0" softConstraintPenalty="17.769999999999996">
+            <days>
+                <timetableDay day="1">
+                    <periods>
+                        <timetablePeriod day="1" timeSlot="1">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p8</session>
+    <room>r4</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>fse-p2</session>
+    <room>r3</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="2">
+                            <assignments>
+<timetableAssignment>
+    <session>fse-p3</session>
+    <room>r3</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>eiaps-p1</session>
+    <room>r4</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="3">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="4">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="5">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="6">
+                            <assignments/>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+                <timetableDay day="2">
+                    <periods>
+                        <timetablePeriod day="2" timeSlot="1">
+                            <assignments>
+<timetableAssignment>
+    <session>eiaps-l1</session>
+    <room>r1</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>mtl-l1</session>
+    <room>r4</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="2">
+                            <assignments>
+<timetableAssignment>
+    <session>fse-l2</session>
+    <room>r4</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="3">
+                            <assignments>
+<timetableAssignment>
+    <session>stat1-l1</session>
+    <room>audimax</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>gik-l2</session>
+    <room>r3</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="4">
+                            <assignments>
+<timetableAssignment>
+    <session>stat1-l1</session>
+    <room>audimax</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>mtl-l2</session>
+    <room>r3</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="5">
+                            <assignments>
+<timetableAssignment>
+    <session>eiaps-l2</session>
+    <room>r1</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>mtl-p1</session>
+    <room>r3</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="6">
+                            <assignments/>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+                <timetableDay day="3">
+                    <periods>
+                        <timetablePeriod day="3" timeSlot="1">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="2">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p4</session>
+    <room>r1</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="3">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="4">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="5">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p3</session>
+    <room>r3</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>mtl-p2</session>
+    <room>r4</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="6">
+                            <assignments/>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+                <timetableDay day="4">
+                    <periods>
+                        <timetablePeriod day="4" timeSlot="1">
+                            <assignments>
+<timetableAssignment>
+    <session>fse-l3</session>
+    <room>r4</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="2">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p2</session>
+    <room>r4</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="3">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="4">
+                            <assignments>
+<timetableAssignment>
+    <session>fse-p1</session>
+    <room>r3</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>eisp-p5</session>
+    <room>r4</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="5">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="6">
+                            <assignments/>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+                <timetableDay day="5">
+                    <periods>
+                        <timetablePeriod day="5" timeSlot="1">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="2">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="3">
+                            <assignments>
+<timetableAssignment>
+    <session>fse-l1</session>
+    <room>r3</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>gik-l1</session>
+    <room>r2</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="4">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p6</session>
+    <room>r2</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>gik-p1</session>
+    <room>r3</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="5">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p7</session>
+    <room>r3</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="6">
+                            <assignments/>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+            </days>
+        </timetable>
+        <timetable name="timetable2" softConstraintPenalty="19.64">
+            <days>
+                <timetableDay day="1">
+                    <periods>
+                        <timetablePeriod day="1" timeSlot="1">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="2">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="3">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="4">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p2</session>
+    <room>r3</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="5">
+                            <assignments>
+<timetableAssignment>
+    <session>eiaps-l2</session>
+    <room>r2</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>mtl-p1</session>
+    <room>r4</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="1" timeSlot="6">
+                            <assignments>
+<timetableAssignment>
+    <session>fse-l2</session>
+    <room>r4</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>mtl-l1</session>
+    <room>r1</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+                <timetableDay day="2">
+                    <periods>
+                        <timetablePeriod day="2" timeSlot="1">
+                            <assignments>
+<timetableAssignment>
+    <session>fse-p1</session>
+    <room>r4</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>eiaps-p1</session>
+    <room>r1</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="2">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="3">
+                            <assignments>
+<timetableAssignment>
+    <session>stat1-l1</session>
+    <room>audimax</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>gik-l2</session>
+    <room>r4</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="4">
+                            <assignments>
+<timetableAssignment>
+    <session>stat1-l1</session>
+    <room>audimax</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>gik-l1</session>
+    <room>r4</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="5">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="2" timeSlot="6">
+                            <assignments/>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+                <timetableDay day="3">
+                    <periods>
+                        <timetablePeriod day="3" timeSlot="1">
+                            <assignments>
+<timetableAssignment>
+    <session>fse-l1</session>
+    <room>r4</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>mtl-l2</session>
+    <room>r1</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="2">
+                            <assignments>
+<timetableAssignment>
+    <session>fse-l3</session>
+    <room>r3</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="3">
+                            <assignments>
+<timetableAssignment>
+    <session>eiaps-l1</session>
+    <room>r2</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="4">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="5">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="3" timeSlot="6">
+                            <assignments/>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+                <timetableDay day="4">
+                    <periods>
+                        <timetablePeriod day="4" timeSlot="1">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p7</session>
+    <room>r2</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>gik-p1</session>
+    <room>r3</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="2">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="3">
+                            <assignments>
+<timetableAssignment>
+    <session>fse-p3</session>
+    <room>r3</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>eisp-p5</session>
+    <room>r4</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="4">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p6</session>
+    <room>r3</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="5">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="4" timeSlot="6">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p3</session>
+    <room>r4</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>fse-p2</session>
+    <room>r2</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+                <timetableDay day="5">
+                    <periods>
+                        <timetablePeriod day="5" timeSlot="1">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="2">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="3">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p4</session>
+    <room>r2</room>
+</timetableAssignment>
+<timetableAssignment>
+    <session>mtl-p2</session>
+    <room>r3</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="4">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="5">
+                            <assignments/>
+                        </timetablePeriod>
+                        <timetablePeriod day="5" timeSlot="6">
+                            <assignments>
+<timetableAssignment>
+    <session>eisp-p8</session>
+    <room>r2</room>
+</timetableAssignment>
+                            </assignments>
+                        </timetablePeriod>
+                    </periods>
+                </timetableDay>
+            </days>
+        </timetable>
+    </timetables>
+</semester>

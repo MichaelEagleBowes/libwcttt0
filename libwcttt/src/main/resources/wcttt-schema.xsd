@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="semester" type="semesterImpl"/>
+
+  <xs:complexType name="semesterImpl">
+    <xs:sequence>
+      <xs:element name="constrWeightings" type="constraintWeightings"/>
+      <xs:element name="chairs">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="chair" type="chair" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="internalRooms">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="internalRoom" type="internalRoom" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="externalRooms">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="externalRoom" type="externalRoom" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="courses">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="course" type="course" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="curricula">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="curriculum" type="curriculum" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="timetables">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="timetable" type="timetable" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="daysPerWeek" type="xs:int" use="required"/>
+    <xs:attribute name="timeSlotsPerDay" type="xs:int" use="required"/>
+    <xs:attribute name="maxDailyLecturesPerCur" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="constraintWeightings">
+    <xs:sequence/>
+    <xs:attribute name="s1" type="xs:double" use="required"/>
+    <xs:attribute name="s2" type="xs:double" use="required"/>
+    <xs:attribute name="s3" type="xs:double" use="required"/>
+    <xs:attribute name="s4" type="xs:double" use="required"/>
+    <xs:attribute name="s5" type="xs:double" use="required"/>
+    <xs:attribute name="s6" type="xs:double" use="required"/>
+    <xs:attribute name="s7" type="xs:double" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="chair">
+    <xs:sequence>
+      <xs:element name="teachers">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="teacher" type="teacher" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="abbreviation" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="teacher">
+    <xs:sequence>
+      <xs:element name="unfavorablePeriods" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="unfavorable" type="period" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="unavailablePeriods" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="unavailable" type="period" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="period">
+    <xs:sequence/>
+    <xs:attribute name="day" type="xs:int" use="required"/>
+    <xs:attribute name="timeSlot" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="timetablePeriod">
+    <xs:complexContent>
+      <xs:extension base="period">
+        <xs:sequence>
+          <xs:element name="assignments">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="timetableAssignment" type="timetableAssignment" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="timetableAssignment">
+    <xs:sequence>
+      <xs:element name="session" type="xs:IDREF"/>
+      <xs:element name="room" type="xs:IDREF"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="internalSession">
+    <xs:sequence>
+      <xs:element name="teacher" type="xs:IDREF"/>
+      <xs:element name="preAssignment" type="period" minOccurs="0"/>
+      <xs:element name="roomRequirements" type="roomFeatures"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="doubleSession" type="xs:boolean" use="required"/>
+    <xs:attribute name="students" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="roomFeatures">
+    <xs:sequence/>
+    <xs:attribute name="projectors" type="xs:int" use="required"/>
+    <xs:attribute name="pcPool" type="xs:boolean" use="required"/>
+    <xs:attribute name="teacherPc" type="xs:boolean" use="required"/>
+    <xs:attribute name="docCam" type="xs:boolean" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="externalSession">
+    <xs:sequence>
+      <xs:element name="teacher" type="xs:IDREF"/>
+      <xs:element name="preAssignment" type="period" minOccurs="0"/>
+      <xs:element name="room" type="xs:IDREF"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="doubleSession" type="xs:boolean" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="externalRoom">
+    <xs:sequence/>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="internalRoom">
+    <xs:sequence>
+      <xs:element name="features" type="roomFeatures"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="capacity" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="course">
+    <xs:sequence>
+      <xs:element name="chair" type="xs:IDREF"/>
+      <xs:element name="lectures">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="lecture" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="practicals" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="practical" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="abbreviation" type="xs:string" use="required"/>
+    <xs:attribute name="courseLevel" type="courseLevel" use="required"/>
+    <xs:attribute name="minNumberOfDays" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="curriculum">
+    <xs:sequence>
+      <xs:element name="courses">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="course" type="xs:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="timetable">
+    <xs:sequence>
+      <xs:element name="days">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="timetableDay" type="timetableDay" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="softConstraintPenalty" type="xs:double" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="timetableDay">
+    <xs:sequence>
+      <xs:element name="periods">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="timetablePeriod" type="timetablePeriod" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="day" type="xs:int" use="required"/>
+  </xs:complexType>
+
+  <xs:simpleType name="courseLevel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Bachelor"/>
+      <xs:enumeration value="Master"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+

@@ -49,7 +49,7 @@ public enum ConstraintType {
 
 	/**
 	 * Lectures shall not take place in the same periods as other lectures or
-	 * practicals in the same curriculum.
+	 * practicals in the same curriculum, if the practicals are the only one of their course.
 	 */
 	h4,
 

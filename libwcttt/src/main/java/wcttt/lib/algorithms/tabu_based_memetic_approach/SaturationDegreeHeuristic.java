@@ -128,7 +128,9 @@ class SaturationDegreeHeuristic {
 				// If the heuristic failed at finding a feasible solution, the
 				// infeasible timetable is discarded and a new timetable is
 				// generated
-				i--;
+				if(i>0) {
+					i--;					
+				}
 			}
 		}
 

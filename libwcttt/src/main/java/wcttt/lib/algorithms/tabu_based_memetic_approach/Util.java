@@ -124,7 +124,7 @@ class Util {
 			throws WctttAlgorithmException {
 		List<InternalRoom> suitableRooms = findSuitableRooms(session, semester);
 		Collections.shuffle(suitableRooms);
-
+		
 		for (Period period : orderedPeriods) {
 			Period secondPeriod = null;
 			if (session.isDoubleSession()) {
@@ -143,6 +143,7 @@ class Util {
 				}
 			}
 			for (InternalRoom room : suitableRooms) {
+				//Check if the room is free
 				if (roomIsFree(room, period, timetable, unassignedPeriods) &&
 						(!session.isDoubleSession() ||
 								roomIsFree(room, secondPeriod, timetable,
@@ -157,6 +158,7 @@ class Util {
 						return true;
 					} catch (WctttAlgorithmException e) {
 						// ignore hard constraint violation and search on
+						System.out.println(e.getMessage());
 					}
 				}
 			}

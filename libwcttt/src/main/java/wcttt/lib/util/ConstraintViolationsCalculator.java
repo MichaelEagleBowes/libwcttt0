@@ -233,7 +233,8 @@ public class ConstraintViolationsCalculator {
 					assignment.getSession().getCourse())) {
 				for (TimetableAssignment otherAssignment : period.getAssignments()) {
 					if (curriculum.getCourses().contains(
-							otherAssignment.getSession().getCourse())) {
+							otherAssignment.getSession().getCourse()) 
+							&& otherAssignment.getSession().getCourse().getPracticals().size() == 1) {
 						counter++;
 					}
 				}
@@ -254,11 +255,12 @@ public class ConstraintViolationsCalculator {
 				numberOfCoursePracticalsInPeriod++;
 			}
 		}
+		
 		if (numberOfCoursePracticals == 1 ||
 				numberOfCoursePracticals == numberOfCoursePracticalsInPeriod) {
 			return h4ViolationCount(period, assignment);
 		}
-
+		
 		int counter = 0;
 		for (Curriculum curriculum : semester.getCurricula()) {
 			if (curriculum.getCourses().contains(

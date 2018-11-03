@@ -229,9 +229,12 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 
 			updatePopulation(population, bestNewSolution);
 			mutationCounter++;
-			this.state.firePropertyChange(new PropertyChangeEvent(this, null, null,
-					"Mutations: [" + mutationCounter + "]" + 
-			" Current penalty: [" + bestNewSolution.getSoftConstraintPenalty() +"]"));
+			//Every 100 mutations fire event
+			if(mutationCounter % 100 == 0) {
+				this.state.firePropertyChange(new PropertyChangeEvent(this, null, null,
+						"Mutations: [" + mutationCounter + "]" + 
+				" Current penalty: [" + Util.round(bestNewSolution.getSoftConstraintPenalty(), 2) +"]"));
+			}		
 		}
 
 		return bestSolution;
@@ -443,8 +446,6 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 			// Copying not possible
 			return null;
 		}
-
-		Util.printRoomPlan(parent, parentPeriod, parentAssgmt);
 
 		// Check whether this is the first or the second session:
 		// Check period after:

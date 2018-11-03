@@ -27,6 +27,7 @@ package wcttt.lib.algorithms;
 
 import wcttt.lib.model.Timetable;
 
+import java.beans.PropertyChangeListener;
 import java.util.List;
 
 /**
@@ -47,7 +48,14 @@ public interface Algorithm {
 	 * @return the list of parameters defined for the algorithm.
 	 */
 	List<ParameterDefinition> getParameters();
-
+	
+	/**
+	 * Adds a {@link PropertyChangeListener} that will be notified when
+	 * the state of the algorithm has changed. 
+	 * @param listener
+	 */
+	public void addChangeListener(PropertyChangeListener listener);
+	
 	/**
 	 * Setter for the parameter values.
 	 *

@@ -55,11 +55,7 @@ public abstract class AbstractAlgorithm implements Algorithm {
 		this.semester = semester;
 	}
 	
-	/**
-	 * Adds a {@link PropertyChangeListener} that will be notified when
-	 * the state of the algorithm has changed. 
-	 * @param listener
-	 */
+	@Override
 	public void addChangeListener(PropertyChangeListener listener) {
 		this.state.addPropertyChangeListener(listener);
 	}

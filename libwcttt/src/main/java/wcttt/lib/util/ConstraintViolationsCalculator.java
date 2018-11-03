@@ -235,8 +235,9 @@ public class ConstraintViolationsCalculator {
 					//Check if course is contained in the curriculum
 					if (curriculum.getCourses().contains(otherAssignment.getSession().getCourse())) {
 						//If assignment is no lecture and has more than one practical it can be ignored.
-						if(!otherAssignment.getSession().isLecture() &&
-								otherAssignment.getSession().getCourse().getPracticals().size() != 1){
+						if(!otherAssignment.getSession().isLecture()){
+							continue;
+						}else if(otherAssignment.getSession().getCourse().getPracticals().size() != 1) {
 							continue;
 						}else {
 							counter++;							
@@ -253,33 +254,37 @@ public class ConstraintViolationsCalculator {
 		int numberOfCoursePracticals =
 				assignment.getSession().getCourse().getPracticals().size();
 		int numberOfCoursePracticalsInPeriod = 0;
-		for (TimetableAssignment otherAssignment : period.getAssignments()) {
-			if (otherAssignment.getSession().getCourse().equals(
-					assignment.getSession().getCourse()) &&
-					!assignment.getSession().isLecture()) {
-				numberOfCoursePracticalsInPeriod++;
-			}
-		}
-		
-		if (numberOfCoursePracticals == 1 ||
-				numberOfCoursePracticals == numberOfCoursePracticalsInPeriod) {
-			return h4ViolationCount(period, assignment);
-		}
 		
 		int counter = 0;
+		
 		for (Curriculum curriculum : semester.getCurricula()) {
 			if (curriculum.getCourses().contains(
 					assignment.getSession().getCourse())) {
+				//Curricular contains course of the assignment
 				for (TimetableAssignment otherAssignment : period.getAssignments()) {
-					if (curriculum.getCourses().contains(
-							otherAssignment.getSession().getCourse()) &&
-							(otherAssignment.getSession().isLecture() ||
-									otherAssignment.getSession().getCourse().
-											getPracticals().size() == 1)) {
-						counter++;
+					//Check if all practicals of the assignment are in the same period
+					if (otherAssignment.getSession().getCourse().equals(
+							assignment.getSession().getCourse()) &&
+							!assignment.getSession().isLecture()) {
+						numberOfCoursePracticalsInPeriod++;
+					}
+					/*
+					 * Curricular contains other course of an assignment in the selected period
+					 */
+					if (curriculum.getCourses().contains(otherAssignment.getSession().getCourse())) {
+						//The other assignment is a lecture or has only one practical.
+						if(otherAssignment.getSession().isLecture() ||
+								otherAssignment.getSession().getCourse().
+								getPracticals().size() == 1) {							
+							counter++;
+						}
 					}
 				}
 			}
+		}
+		//All practicals are overlapping
+		if(numberOfCoursePracticals == numberOfCoursePracticalsInPeriod) {
+			counter++;
 		}
 		return counter;
 	}

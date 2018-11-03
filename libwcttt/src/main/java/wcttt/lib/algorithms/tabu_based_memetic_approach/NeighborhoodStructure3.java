@@ -103,13 +103,14 @@ public class NeighborhoodStructure3 implements NeighborhoodStructure {
 			periodB = dayB.getPeriods().get(
 					random.nextInt(dayB.getPeriods().size()));
 			counter++;
-		} while (counter < 100 && periodA == periodB || (dayA != dayB &&
+		} while (counter < 100 ||
+				(dayA.getDay() == dayB.getDay() &&
 				(twoCourseLecturesInDay(dayA, periodB, periodA) ||
 						twoCourseLecturesInDay(dayB, periodA, periodB))) ||
 				containsPreAssignmentOrDoubleSession(periodA) ||
-				containsPreAssignmentOrDoubleSession(periodB) );
+				containsPreAssignmentOrDoubleSession(periodB));
 
-		if (counter == 100) {
+		if (counter >= 100) {
 			// No suitable pair of periods could be found, probably too many
 			// double sessions and pre-assignments
 			return null;

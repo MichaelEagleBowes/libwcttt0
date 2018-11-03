@@ -51,9 +51,7 @@ public class NeighborhoodStructure2 implements NeighborhoodStructure {
 		do {
 			randomAssgmt = selectRandomAssignment(timetable);
 		} while (randomAssgmt.getSession().getPreAssignment().isPresent());
-
 		removeSessionAssignments(timetable, randomAssgmt);
-
 		// Because external sessions must have a pre-assignment:
 		assert randomAssgmt.getSession() instanceof InternalSession;
 		assert randomAssgmt.getRoom() instanceof InternalRoom;
@@ -98,6 +96,7 @@ public class NeighborhoodStructure2 implements NeighborhoodStructure {
 						removePeriods.add(period);
 						removeAssgmts.add(assgmt);
 						removed++;
+						//Break the loop if the correct number of sessions has been removed.
 						if ((!randomAssgmt.getSession().isDoubleSession() &&
 								removed == 1) ||
 								(randomAssgmt.getSession().isDoubleSession() &&

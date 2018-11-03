@@ -435,6 +435,8 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 			return null;
 		}
 
+		Util.printRoomPlan(parent, parentPeriod, parentAssgmt);
+
 		// Check whether this is the first or the second session:
 		// Check period after:
 		if (parentPeriod.getTimeSlot() < getSemester().getTimeSlotsPerDay()) {
@@ -481,8 +483,9 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 
 	private TimetableAssignment findAssignmentInPeriod(Session session,
 	                                                   TimetablePeriod period) {
+		
 		for (TimetableAssignment assgmt : period.getAssignments()) {
-			if (assgmt.getSession().equals(session)) {
+			if (assgmt.getSession().equals(session)) {				
 				return assgmt;
 			}
 		}

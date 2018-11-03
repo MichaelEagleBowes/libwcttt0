@@ -142,7 +142,7 @@ class Util {
 					}
 				}
 			}
-			for (InternalRoom room : suitableRooms) {
+			for (InternalRoom room : suitableRooms) {				
 				//Check if the room is free
 				if (roomIsFree(room, period, timetable, unassignedPeriods) &&
 						(!session.isDoubleSession() ||
@@ -158,7 +158,6 @@ class Util {
 						return true;
 					} catch (WctttAlgorithmException e) {
 						// ignore hard constraint violation and search on
-						System.out.println(e.getMessage());
 					}
 				}
 			}
@@ -192,6 +191,24 @@ class Util {
 			}
 			return true;
 		}
+	}
+	
+	/**
+	 * Prints the plan for a given room. Used for debugging.
+	 * @param timetable
+	 * @param parentPeriod
+	 * @param parentAssgmt
+	 */
+	public static void printRoomPlan(Timetable timetable, TimetablePeriod parentPeriod, TimetableAssignment parentAssgmt) {
+		System.out.println("Room plan: ");
+		for(TimetablePeriod period : timetable.getDays().get(parentPeriod.getDay() - 1).getPeriods()) {
+			for(TimetableAssignment assignment : period.getAssignments()) {
+				if(assignment.getRoom().equals(parentAssgmt.getRoom())) {
+					System.out.println(" - " + assignment + "  : " +  period.getTimeSlot());
+				}
+			}
+		}
+		System.out.println("END ROOM PLAN");
 	}
 
 	/**
@@ -273,6 +290,7 @@ class Util {
 			if (room instanceof InternalRoom && unassignedPeriods != null) {
 				unassignedPeriods.get(room).remove(period);
 			}
+			
 		} catch (WctttModelException e) {
 			throw new WctttAlgorithmFatalException("Implementation error, " +
 					"problem while adding an assignment to the timetable", e);

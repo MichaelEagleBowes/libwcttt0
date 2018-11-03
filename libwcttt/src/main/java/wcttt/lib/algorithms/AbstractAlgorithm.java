@@ -28,6 +28,8 @@ package wcttt.lib.algorithms;
 import wcttt.lib.model.Semester;
 import wcttt.lib.model.Timetable;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -36,6 +38,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public abstract class AbstractAlgorithm implements Algorithm {
 
+	protected final PropertyChangeSupport state = new PropertyChangeSupport(this);
 	private final Semester semester;
 	private final AtomicBoolean isCancelled = new AtomicBoolean(false);
 
@@ -50,6 +53,15 @@ public abstract class AbstractAlgorithm implements Algorithm {
 					" be null");
 		}
 		this.semester = semester;
+	}
+	
+	/**
+	 * Adds a {@link PropertyChangeListener} that will be notified when
+	 * the state of the algorithm has changed. 
+	 * @param listener
+	 */
+	public void addChangeListener(PropertyChangeListener listener) {
+		this.state.addPropertyChangeListener(listener);
 	}
 
 	/**

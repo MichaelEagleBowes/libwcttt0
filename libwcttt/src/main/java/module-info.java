@@ -1,6 +1,7 @@
 module wcttt.lib {
 	requires java.xml.bind;
 	requires javafx.base;
+	requires transitive java.desktop;
 
 	exports wcttt.lib.model;
 	exports wcttt.lib.binder;

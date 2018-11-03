@@ -29,6 +29,7 @@ import wcttt.lib.algorithms.*;
 import wcttt.lib.model.*;
 import wcttt.lib.util.ConstraintViolationsCalculator;
 
+import java.beans.PropertyChangeEvent;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -160,6 +161,9 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 	@Override
 	protected Timetable runAlgorithm(AtomicBoolean isCancelled)
 			throws WctttAlgorithmException {
+		
+		this.state.firePropertyChange(new PropertyChangeEvent(this, null, null, "Population is being created"));
+		
 		// Generate random initial population of feasible solutions:
 		SaturationDegreeHeuristic satDegHeuristic =
 				new SaturationDegreeHeuristic(getSemester());
@@ -170,8 +174,8 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 		// solution was found, then return no feasible solution:
 		if (population.isEmpty()) {
 			return null;
-		}
-
+		}	
+		
 		// Find best solution:
 		ConstraintViolationsCalculator constrCalc =
 				new ConstraintViolationsCalculator(getSemester());
@@ -182,7 +186,8 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 		Queue<NeighborhoodStructure> tabuList = new LinkedList<>();
 		boolean chooseNewNbs = true; // Nbs == neighborhood structure
 		NeighborhoodStructure selectedNbs = null;
-
+		
+		int mutationCounter = 0;
 		while (bestSolution.getSoftConstraintPenalty() != 0 &&
 				!isCancelled.get()) {
 			// Genetic operators:
@@ -223,6 +228,10 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 			}
 
 			updatePopulation(population, bestNewSolution);
+			mutationCounter++;
+			this.state.firePropertyChange(new PropertyChangeEvent(this, null, null,
+					"Mutations: [" + mutationCounter + "]" + 
+			" Current penalty: [" + bestNewSolution.getSoftConstraintPenalty() +"]"));
 		}
 
 		return bestSolution;

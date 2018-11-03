@@ -57,6 +57,7 @@ public enum ConstraintType {
 	 * Practicals shall not take place in the same periods as other practicals
 	 * of the curriculum if the course has only one practical or all of its
 	 * practicals are overlapping.
+	 * Practicals shall also not take place in the same period as their lecture.
 	 */
 	h5,
 

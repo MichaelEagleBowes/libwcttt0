@@ -30,6 +30,8 @@ import wcttt.lib.algorithms.WctttAlgorithmFatalException;
 import wcttt.lib.model.*;
 import wcttt.lib.util.ConstraintViolationsCalculator;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -209,6 +211,14 @@ class Util {
 			}
 		}
 		System.out.println("END ROOM PLAN");
+	}
+	
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+
+	    BigDecimal bd = new BigDecimal(value);
+	    bd = bd.setScale(places, RoundingMode.HALF_UP);
+	    return bd.doubleValue();
 	}
 
 	/**

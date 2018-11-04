@@ -29,15 +29,24 @@ public class ConstraintViolationsCalculatorTest {
 	private static Course course4;
 	private static Curriculum cur1;
 	private static Curriculum cur2;
+	
+	//Curriculum1
+	//Course1
 	private static Session lecture1;
 	private static Session practical1;
+	//Course2
 	private static Session lecture2;
 	private static Session practical2;
+	
+	//Curriculum2
+	//Course3
 	private static Session lecture3;
 	private static Session practical3;
 	private static Session practical4;
+	//Course4
 	private static Session lecture4;
 	private static Session practical5;
+	
 	private static InternalRoom room1;
 	private static InternalRoom room2;
 	private static InternalRoom room3;
@@ -146,7 +155,6 @@ public class ConstraintViolationsCalculatorTest {
 			practical5.setName("T4 Ü2");
 			
 			course4.addLecture(lecture4);
-			course4.addPractical(practical4);
 			course4.addPractical(practical5);
 			
 			cur1 = new Curriculum("FFFAWWQQSDA", "Curriculum 1");
@@ -224,6 +232,7 @@ public class ConstraintViolationsCalculatorTest {
 			period.addAssignment(assignment1);
 			couldAssign= true;
 		} catch (WctttModelException e) {
+			System.err.println(e.getMessage());
 			couldAssign = false;
 		}
 		assertTrue(couldAssign);
@@ -254,6 +263,7 @@ public class ConstraintViolationsCalculatorTest {
 			period.addAssignment(assignment1);
 			couldAssign= true;
 		} catch (WctttModelException e) {
+			System.err.println(e.getMessage());
 			couldAssign = false;
 		}
 		assertTrue(couldAssign);
@@ -284,6 +294,7 @@ public class ConstraintViolationsCalculatorTest {
 			period.addAssignment(assignment1);
 			couldAssign= true;
 		} catch (WctttModelException e) {
+			System.err.println(e.getMessage());
 			couldAssign = false;
 		}
 		assertTrue(couldAssign);
@@ -314,6 +325,7 @@ public class ConstraintViolationsCalculatorTest {
 			period.addAssignment(assignment1);
 			couldAssign= true;
 		} catch (WctttModelException e) {
+			System.err.println(e.getMessage());
 			couldAssign = false;
 		}
 		assertTrue(couldAssign);
@@ -344,6 +356,7 @@ public class ConstraintViolationsCalculatorTest {
 			period.addAssignment(assignment1);
 			couldAssign= true;
 		} catch (WctttModelException e) {
+			System.err.println(e.getMessage());
 			couldAssign = false;
 		}
 		assertTrue(couldAssign);
@@ -373,6 +386,7 @@ public class ConstraintViolationsCalculatorTest {
 			period.addAssignment(assignment1);
 			couldAssign= true;
 		} catch (WctttModelException e) {
+			System.err.println(e.getMessage());
 			couldAssign = false;
 		}
 		assertTrue(couldAssign);
@@ -402,6 +416,7 @@ public class ConstraintViolationsCalculatorTest {
 			period.addAssignment(assignment1);
 			couldAssign= true;
 		} catch (WctttModelException e) {
+			System.err.println(e.getMessage());
 			couldAssign = false;
 		}
 		assertTrue(couldAssign);
@@ -427,10 +442,11 @@ public class ConstraintViolationsCalculatorTest {
 		try {
 			TimetableAssignment assignment1 = new TimetableAssignment();
 			assignment1.setRoom(room1);
-			assignment1.setSession(practical4);
+			assignment1.setSession(practical3);
 			period.addAssignment(assignment1);
 			couldAssign= true;
 		} catch (WctttModelException e) {
+			System.err.println(e.getMessage());
 			couldAssign = false;
 		}
 		assertTrue(couldAssign);
@@ -460,6 +476,37 @@ public class ConstraintViolationsCalculatorTest {
 			period.addAssignment(assignment1);
 			couldAssign= true;
 		} catch (WctttModelException e) {
+			System.err.println(e.getMessage());
+			couldAssign = false;
+		}
+		assertTrue(couldAssign);
+		TimetableAssignment assignment2 = new TimetableAssignment();
+		assignment2.setRoom(room2);
+		assignment2.setSession(practical2);
+		List<ConstraintType> violations = cvc.calcAssignmentHardViolations(timetable, period, assignment2);
+		//Check the number of violations
+		int counter = 0;
+		for(ConstraintType violation : violations) {
+			if(violation == ConstraintType.h5) {
+				counter++;
+			}
+		}
+		assertEquals(1, counter);
+	}
+	
+	@Test
+	void constraintH5LectureViolation() {
+		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
+		assertNotNull(period);
+		boolean couldAssign = false;
+		try {
+			TimetableAssignment assignment1 = new TimetableAssignment();
+			assignment1.setRoom(room1);
+			assignment1.setSession(lecture1);
+			period.addAssignment(assignment1);
+			couldAssign= true;
+		} catch (WctttModelException e) {
+			System.err.println(e.getMessage());
 			couldAssign = false;
 		}
 		assertTrue(couldAssign);
@@ -485,16 +532,17 @@ public class ConstraintViolationsCalculatorTest {
 		try {
 			TimetableAssignment assignment1 = new TimetableAssignment();
 			assignment1.setRoom(room1);
-			assignment1.setSession(practical4);
+			assignment1.setSession(practical3);
 			period.addAssignment(assignment1);
 			couldAssign= true;
 		} catch (WctttModelException e) {
+			System.err.println(e.getMessage());
 			couldAssign = false;
 		}
 		assertTrue(couldAssign);
 		TimetableAssignment assignment2 = new TimetableAssignment();
 		assignment2.setRoom(room2);
-		assignment2.setSession(lecture3);
+		assignment2.setSession(practical5);
 		List<ConstraintType> violations = cvc.calcAssignmentHardViolations(timetable, period, assignment2);
 		//Check the number of violations
 		int counter = 0;
@@ -504,6 +552,57 @@ public class ConstraintViolationsCalculatorTest {
 			}
 		}
 		assertEquals(0, counter);
+	}
+	
+	@Test
+	void constraintH6Violation() {
+		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
+		assertNotNull(period);
+		InternalSession lecture5 = null;
+		InternalSession lecture6 = null;
+		boolean couldAssign = false;
+		try {			
+			Teacher teacher = new Teacher("DASDAAARER","Peter");
+			
+			lecture5 = new InternalSession();
+			lecture5.setCourse(course4);	
+			lecture5.setTeacher(teacher);
+			lecture5.setId("KLJFFSAFSD");
+			lecture5.setName("Same Teacher V1");	
+			
+			lecture6 = new InternalSession();
+			lecture6.setCourse(course4);	
+			lecture6.setTeacher(teacher);
+			lecture6.setId("KLJFZTFZTF");
+			lecture6.setName("Same Teacher V2");	
+	
+			course4.addLecture(lecture5);
+			course4.addLecture(lecture6);
+			
+			TimetableAssignment assignment1 = new TimetableAssignment();
+			assignment1.setRoom(room1);
+			assignment1.setSession(lecture5);
+			period.addAssignment(assignment1);
+			
+			couldAssign= true;
+		} catch (WctttModelException e) {
+			System.err.println(e.getMessage());
+			couldAssign = false;
+		}
+		assertTrue(couldAssign);	
+		
+		TimetableAssignment assignment2 = new TimetableAssignment();
+		assignment2.setRoom(room2);
+		assignment2.setSession(lecture6);
+		List<ConstraintType> violations = cvc.calcAssignmentHardViolations(timetable, period, assignment2);
+		//Check the number of violations
+		int counter = 0;
+		for(ConstraintType violation : violations) {
+			if(violation == ConstraintType.h6) {
+				counter++;
+			}
+		}
+		assertEquals(1, counter);
 	}
 	
 }

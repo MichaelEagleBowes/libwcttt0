@@ -103,20 +103,25 @@ public class NeighborhoodStructure3 implements NeighborhoodStructure {
 			periodB = dayB.getPeriods().get(
 					random.nextInt(dayB.getPeriods().size()));
 			counter++;
-		} while (counter < 100 ||
-				(dayA.getDay() == dayB.getDay() &&
-				(twoCourseLecturesInDay(dayA, periodB, periodA) ||
-						twoCourseLecturesInDay(dayB, periodA, periodB))) ||
-				containsPreAssignmentOrDoubleSession(periodA) ||
-				containsPreAssignmentOrDoubleSession(periodB));
-
-		if (counter >= 100) {
-			// No suitable pair of periods could be found, probably too many
-			// double sessions and pre-assignments
-			return null;
-		} else {
+		
+		/*
+		 * Check if the periods are the same and
+		 * if the periods contain double sessions or preassignments and
+		 * if there wont be more than one lecture in a day.
+		 */
+		if(!(dayA.getDay() == dayB.getDay() &&
+				periodA.getTimeSlot() == periodB.getTimeSlot()) &&
+				!(containsPreAssignmentOrDoubleSession(periodA) ||
+				containsPreAssignmentOrDoubleSession(periodB)) &&
+				!(twoCourseLecturesInDay(dayA, periodB, periodA) ||
+				twoCourseLecturesInDay(dayB, periodA, periodB))) {
 			return new TimetablePeriod[]{periodA, periodB};
 		}
+		
+		} while (counter < 100);
+		// No suitable pair of periods could be found, probably too many
+		// double sessions and pre-assignments
+		return null;
 	}
 
 	private boolean containsPreAssignmentOrDoubleSession(TimetablePeriod period) {

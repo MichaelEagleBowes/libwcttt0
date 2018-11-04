@@ -200,7 +200,14 @@ public class ConstraintViolationsCalculatorTest {
 			
 			room4 = new InternalRoom();
 			room4.setId("TTL33123");
-			room4.setName("Room 4");		
+			room4.setName("Room 4");
+			
+			RoomFeatures req1 = new RoomFeatures (2, false, false, false);		
+			RoomFeatures req2 = new RoomFeatures (1, true, true, false);
+			((InternalSession)lecture5).setRoomRequirements(req1);
+			
+			room3.setFeatures(req1);
+			room4.setFeatures(req2);
 					
 			semester.addChair(chair);
 			semester.addCourse(course1);
@@ -242,7 +249,7 @@ public class ConstraintViolationsCalculatorTest {
 	}
 	
 	@Test
-	void constraintH1Violation() {
+	void h1ViolationSinglePracticalInPeriod() {
 		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
 		assertNotNull(period);
 		boolean couldAssign = false;
@@ -273,7 +280,7 @@ public class ConstraintViolationsCalculatorTest {
 	}
 	
 	@Test
-	void constraintH1NoViolation() {
+	void h1NoViolationDifferentPeriods() {
 		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
 		assertNotNull(period);
 		boolean couldAssign = false;
@@ -304,7 +311,7 @@ public class ConstraintViolationsCalculatorTest {
 	}
 	
 	@Test
-	void constraintH2Violation() {
+	void h2ViolationLectureInPeriod() {
 		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
 		assertNotNull(period);
 		boolean couldAssign = false;
@@ -335,7 +342,7 @@ public class ConstraintViolationsCalculatorTest {
 	}
 	
 	@Test
-	void constraintH2NoViolation() {
+	void h2NoViolationNoLectureInPeriod() {
 		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
 		assertNotNull(period);
 		boolean couldAssign = false;
@@ -366,7 +373,7 @@ public class ConstraintViolationsCalculatorTest {
 	}
 	
 	@Test
-	void constraintH3Violation() {
+	void h3ViolationSameRoomMultipleSessions() {
 		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
 		assertNotNull(period);
 		boolean couldAssign = false;
@@ -396,7 +403,7 @@ public class ConstraintViolationsCalculatorTest {
 	}
 	
 	@Test
-	void constraintH3NoViolation() {
+	void h3NoViolationDifferentRooms() {
 		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
 		assertNotNull(period);
 		boolean couldAssign = false;
@@ -426,7 +433,7 @@ public class ConstraintViolationsCalculatorTest {
 	}
 	
 	@Test
-	void constraintH4SinglePracticalViolation() {
+	void h4ViolationSinglePractical() {
 		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
 		assertNotNull(period);
 		boolean couldAssign = false;
@@ -456,7 +463,7 @@ public class ConstraintViolationsCalculatorTest {
 	}
 	
 	@Test
-	void constraintH4MultiplePracticalNoViolation() {
+	void h4NoViolationMultiplePracticals() {
 		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
 		assertNotNull(period);
 		boolean couldAssign = false;
@@ -486,7 +493,7 @@ public class ConstraintViolationsCalculatorTest {
 	}
 	
 	@Test
-	void constraintH5SinglePracticalViolation() {
+	void h5ViolationSinglePractical() {
 		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
 		assertNotNull(period);
 		boolean couldAssign = false;
@@ -516,7 +523,7 @@ public class ConstraintViolationsCalculatorTest {
 	}
 	
 	@Test
-	void constraintH5LectureViolation() {
+	void h5ViolationLectureInPeriod() {
 		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
 		assertNotNull(period);
 		boolean couldAssign = false;
@@ -546,7 +553,7 @@ public class ConstraintViolationsCalculatorTest {
 	}
 	
 	@Test
-	void constraintH5MultiplePracticalNoViolation() {
+	void h5NoViolationMultiplePracticals() {
 		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
 		assertNotNull(period);
 		boolean couldAssign = false;
@@ -576,7 +583,7 @@ public class ConstraintViolationsCalculatorTest {
 	}
 	
 	@Test
-	void constraintH6Violation() {
+	void h6ViolationTeacherSamePeriod() {
 		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
 		assertNotNull(period);
 		boolean couldAssign = false;
@@ -608,7 +615,7 @@ public class ConstraintViolationsCalculatorTest {
 	}
 	
 	@Test
-	void constraintH6NoViolation() {
+	void h6NoViolationSameTeacherDifferentPeriod() {
 		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
 		assertNotNull(period);
 		boolean couldAssign = false;
@@ -641,7 +648,7 @@ public class ConstraintViolationsCalculatorTest {
 	}
 	
 	@Test
-	void constraintH8Violation() {
+	void h8ViolationLecturesOnSameDay() {
 		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
 		assertNotNull(period);
 		boolean couldAssign = false;
@@ -674,7 +681,7 @@ public class ConstraintViolationsCalculatorTest {
 	}
 	
 	@Test
-	void constraintH8NoViolation() {
+	void h8NoViolationLecturesOnDifferentDays() {
 		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
 		assertNotNull(period);
 		boolean couldAssign = false;
@@ -705,5 +712,111 @@ public class ConstraintViolationsCalculatorTest {
 		}
 		assertEquals(0, counter);
 	}
+	
+	@Test
+	void h9ViolationWrongPreassignment() {
+		TimetableAssignment assignment2 = new TimetableAssignment();
+		assignment2.setRoom(room2);
+		assignment2.setSession(lecture6);
+		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
+		boolean couldAssign = false;
+		try {
+			lecture6.setPreAssignment(period);
+			couldAssign= true;
+		} catch (WctttModelException e) {
+			System.err.println(e.getMessage());
+			couldAssign = false;
+		}
+		assertTrue(couldAssign);
+		TimetablePeriod nextPeriod = timetable.getDays().get(0).getPeriods().get(1);
+		List<ConstraintType> violations = cvc.calcAssignmentHardViolations(timetable, nextPeriod, assignment2);
+		//Check the number of violations
+		int counter = 0;
+		for(ConstraintType violation : violations) {
+			if(violation == ConstraintType.h9) {
+				counter++;
+			}
+		}
+		assertEquals(1, counter);
+	}
+	
+	@Test
+	void h9NoViolationMatchingPreassignment() {
+		TimetableAssignment assignment2 = new TimetableAssignment();
+		assignment2.setRoom(room2);
+		assignment2.setSession(lecture6);
+		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
+		boolean couldAssign = false;
+		try {
+			lecture6.setPreAssignment(period);
+			couldAssign= true;
+		} catch (WctttModelException e) {
+			System.err.println(e.getMessage());
+			couldAssign = false;
+		}
+		assertTrue(couldAssign);
+		List<ConstraintType> violations = cvc.calcAssignmentHardViolations(timetable, period, assignment2);
+		//Check the number of violations
+		int counter = 0;
+		for(ConstraintType violation : violations) {
+			if(violation == ConstraintType.h9) {
+				counter++;
+			}
+		}
+		assertEquals(0, counter);
+	}
+	
+	@Test
+	void h10ViolationNoMatchingFeatures() {
+		TimetableAssignment assignment2 = new TimetableAssignment();
+		assignment2.setRoom(room4);
+		assignment2.setSession(lecture5);
+		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
+		List<ConstraintType> violations = cvc.calcAssignmentHardViolations(timetable, period, assignment2);
+		//Check the number of violations
+		int counter = 0;
+		for(ConstraintType violation : violations) {
+			if(violation == ConstraintType.h10) {
+				counter++;
+			}
+		}
+		assertEquals(1, counter);
+	}
+	
+	@Test
+	void h10ViolationNoFeatures() {
+		TimetableAssignment assignment2 = new TimetableAssignment();
+		assignment2.setRoom(room1);
+		assignment2.setSession(lecture5);
+		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
+		List<ConstraintType> violations = cvc.calcAssignmentHardViolations(timetable, period, assignment2);
+		//Check the number of violations
+		int counter = 0;
+		for(ConstraintType violation : violations) {
+			if(violation == ConstraintType.h10) {
+				counter++;
+			}
+		}
+		assertEquals(1, counter);
+	}
+	
+	@Test
+	void h10NoViolationMatchingFeatures() {
+		TimetableAssignment assignment2 = new TimetableAssignment();
+		assignment2.setRoom(room3);
+		assignment2.setSession(lecture5);
+		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
+		List<ConstraintType> violations = cvc.calcAssignmentHardViolations(timetable, period, assignment2);
+		//Check the number of violations
+		int counter = 0;
+		for(ConstraintType violation : violations) {
+			if(violation == ConstraintType.h10) {
+				counter++;
+			}
+		}
+		assertEquals(0, counter);
+	}
+	
+	
 	
 }

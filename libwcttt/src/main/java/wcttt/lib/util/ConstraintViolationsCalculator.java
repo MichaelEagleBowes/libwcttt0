@@ -57,7 +57,7 @@ public class ConstraintViolationsCalculator {
 			TimetableAssignment assignment) {
 		List<ConstraintType> hardViolations = new LinkedList<>();
 
-		if (!assignment.getSession().isLecture()) {
+		if (assignment.getSession().isLecture()) {
 			hardViolations.addAll(Collections.nCopies(
 					h1ViolationCount(period, assignment), ConstraintType.h1));
 		} else {

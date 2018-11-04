@@ -43,44 +43,32 @@ public class ConstraintViolationsCalculatorTest {
 	
 	
 	@BeforeAll
-	void createSemester() {		
+	static void createSemester() {	
+		
+		semester = new SemesterImpl();
 		try {
 			chair = new Chair();
 			chair.setAbbreviation("TST");
 			chair.setId("9999AA");
 			chair.setName("Lehrstuhl für Tests");
-			
-			teacher1 = new Teacher();
-			teacher1.setId("AAAAAAAAAA");
-			teacher1.setName("Dieter");
-			
-			teacher2 = new Teacher();
-			teacher2.setId("BBBBBBBBBB");
-			teacher2.setName("Willhelm");
-			
-			teacher3 = new Teacher();
-			teacher3.setId("CCCCCCCCC");
-			teacher3.setName("Otto");
-			
-			teacher4 = new Teacher();
-			teacher4.setId("DDDDDDDDDD");
-			teacher4.setName("Klaus");
+			teacher1 = new Teacher("AAAAAAAAAA", "Dieter");			
+			teacher2 = new Teacher("BBBBBBBBBB", "Willhelm");		
+			teacher3 = new Teacher("CCCCCCCCC", "Otto");			
+			teacher4 = new Teacher("DDDDDDDDDD", "Klaus");
 			
 			chair.addTeacher(teacher1);
 			chair.addTeacher(teacher2);
 			
-			course1 = new Course();
-			course1.setChair(chair);
-			course1.setId("123456");
-			course1.setName("Test Course 1");
-			course1.setAbbreviation("T1");
 			
-			
+			course1 = new Course("123456", "Test Course 1",
+					"T1", chair, CourseLevel.Bachelor, 1);
+		
 			lecture1 = new InternalSession();
 			lecture1.setCourse(course1);
 			lecture1.setTeacher(teacher1);
 			lecture1.setId("0111111");
 			lecture1.setName("T1 V");
+			
 			
 			practical1 = new InternalSession();
 			practical1.setCourse(course1);
@@ -90,12 +78,9 @@ public class ConstraintViolationsCalculatorTest {
 			
 			course1.addLecture(lecture1);
 			course1.addPractical(practical1);
-			
-			course2 = new Course();
-			course2.setChair(chair);
-			course2.setId("134123");
-			course2.setName("Test Course 2");
-			course2.setAbbreviation("T2");
+						
+			course2 = new Course("134123", "Test Course 2",
+					"T2", chair, CourseLevel.Bachelor, 1);	
 			
 			lecture2 = new InternalSession();
 			lecture2.setCourse(course2);
@@ -112,11 +97,8 @@ public class ConstraintViolationsCalculatorTest {
 			course2.addLecture(lecture2);
 			course2.addPractical(practical2);
 			
-			course3 = new Course();
-			course3.setChair(chair);
-			course3.setId("124444");
-			course3.setName("Test Course 3");
-			course3.setAbbreviation("T3");
+			course3 = new Course("124444", "Test Course 3",
+					"T3", chair, CourseLevel.Bachelor, 1);
 			
 			lecture3 = new InternalSession();
 			lecture3.setCourse(course3);
@@ -140,37 +122,36 @@ public class ConstraintViolationsCalculatorTest {
 			course3.addPractical(practical3);
 			course3.addPractical(practical4);
 			
-			course4 = new Course();
-			course4.setChair(chair);
-			course4.setId("1255555");
-			course4.setName("Test Course 4");
-			course4.setAbbreviation("T4");
+			course4= new Course("1255555", "Test Course 4",
+					"T4", chair, CourseLevel.Bachelor, 1);
 			
 			lecture4 = new InternalSession();
-			lecture4.setCourse(course4);
+			lecture4.setCourse(course4);	
 			lecture4.setTeacher(teacher4);
-			lecture4.setId("0112444111");
+			lecture4.setId("01008111");
 			lecture4.setName("T4 V");			
-						
+			
 			practical4 = new InternalSession();
 			practical4.setCourse(course4);
 			practical4.setTeacher(teacher4);
-			practical4.setId("011134412");
+			practical4.setId("011774412");
 			practical4.setName("T4 Ü1");
 			
 			practical5 = new InternalSession();
 			practical5.setCourse(course4);
 			practical5.setTeacher(teacher4);
-			practical5.setId("011134412");
+			practical5.setId("01784412");
 			practical5.setName("T4 Ü2");
 			
 			course4.addLecture(lecture4);
 			course4.addPractical(practical4);
 			course4.addPractical(practical5);
 			
+			cur1 = new Curriculum("FFFAWWQQSDA", "Curriculum 1");
 			cur1.addCourse(course1);
-			cur1.addCourse(course2);
+			cur1.addCourse(course2);			
 			
+			cur2 = new Curriculum("FFFFFASDDDA", "Curriculum 2");
 			cur2.addCourse(course3);
 			cur2.addCourse(course4);
 			
@@ -188,8 +169,8 @@ public class ConstraintViolationsCalculatorTest {
 			
 			room4 = new InternalRoom();
 			room4.setId("TTL33123");
-			room4.setName("Room 4");
-								
+			room4.setName("Room 4");		
+					
 			semester.addChair(chair);
 			semester.addCourse(course1);
 			semester.addCourse(course2);
@@ -201,32 +182,32 @@ public class ConstraintViolationsCalculatorTest {
 			semester.addInternalRoom(room2);
 			semester.addInternalRoom(room3);
 			semester.addInternalRoom(room4);
-			
 			cvc = new ConstraintViolationsCalculator(semester);
+			
 		}catch(WctttModelException e) {
-			System.err.println("Could not create semester");
-			throw new RuntimeException(e);
+				
+			System.err.println(e.getMessage());
+			semester = null;
 		}				
-		
 	}
 	
 	@BeforeEach
-	void createTimetable() {		
+	void createTimetable() {	
 		try {
 			if(timetable != null) {
 				semester.removeTimetable(timetable);
 			}
 			timetable = new Timetable();
-			for(int d = 0; d < 6; d++) {
-				TimetableDay day = new TimetableDay();
+			for(int d = 1; d < 8; d++) {
+				TimetableDay day = new TimetableDay(d);
 				for(int p = 0; p < 6; p++) {
-					day.addPeriod(new TimetablePeriod());
+					day.addPeriod(new TimetablePeriod(d, p));
 				}
 				timetable.addDay(day);
 			}			
 			semester.addTimetable(timetable);
 		} catch (WctttModelException e) {
-			throw new RuntimeException(e);
+			System.err.println(e.getMessage());
 		}
 	}
 	

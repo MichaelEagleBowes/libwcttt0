@@ -162,7 +162,7 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 	@Override
 	protected Timetable runAlgorithm(AtomicBoolean isCancelled)
 			throws WctttAlgorithmException {
-		
+		double minimumPenaltyFound = Double.MAX_VALUE;
 		this.state.firePropertyChange(new PropertyChangeEvent(this, null, null, "Population is being created..."));
 		
 		// Generate random initial population of feasible solutions:
@@ -242,9 +242,11 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 			mutationCounter++;
 			//Every 100 mutations fire event
 			if(mutationCounter % 100 == 0) {
+				minimumPenaltyFound = Math.min(minimumPenaltyFound,
+						bestNewSolution.getSoftConstraintPenalty());
 				this.state.firePropertyChange(new PropertyChangeEvent(this, null, null,
 						"Mutations: [" + mutationCounter + "]" + 
-				" Current penalty: [" + Util.round(bestNewSolution.getSoftConstraintPenalty(), 2) +"]"));
+				" Current penalty: [" + Util.round(minimumPenaltyFound, 2) +"]"));
 			}		
 		}
 

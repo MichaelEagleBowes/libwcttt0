@@ -30,6 +30,7 @@ import wcttt.lib.model.*;
 import wcttt.lib.util.ConstraintViolationsCalculator;
 
 import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -162,11 +163,21 @@ public class TabuBasedMemeticApproach extends AbstractAlgorithm {
 	protected Timetable runAlgorithm(AtomicBoolean isCancelled)
 			throws WctttAlgorithmException {
 		
-		this.state.firePropertyChange(new PropertyChangeEvent(this, null, null, "Population is being created"));
+		this.state.firePropertyChange(new PropertyChangeEvent(this, null, null, "Population is being created..."));
 		
 		// Generate random initial population of feasible solutions:
 		SaturationDegreeHeuristic satDegHeuristic =
 				new SaturationDegreeHeuristic(getSemester());
+		
+		satDegHeuristic.addPropertyChangeListener(new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				int populationSize = (int) evt.getNewValue();
+				state.firePropertyChange(new PropertyChangeEvent(
+						this, null, null, "Population is being created [" + populationSize + "]"));				
+			}
+			
+		});
 		List<Timetable> population = satDegHeuristic.generateFeasibleSolutions(
 				populationSize, isCancelled);
 

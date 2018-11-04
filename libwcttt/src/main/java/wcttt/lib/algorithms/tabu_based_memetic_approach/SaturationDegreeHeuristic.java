@@ -33,6 +33,9 @@ import wcttt.lib.util.SessionRoomConflict;
 import wcttt.lib.util.SessionSessionConflict;
 import wcttt.lib.util.TeacherPeriodConflict;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Stream;
@@ -50,6 +53,7 @@ class SaturationDegreeHeuristic {
 	private Map<Session, Map<Session, SessionSessionConflict>> sessionSessionConflicts;
 	private Map<InternalSession, Map<InternalRoom, SessionRoomConflict>> sessionRoomConflicts;
 	private Map<Teacher, Map<Period, TeacherPeriodConflict>> teacherPeriodConflicts;
+	protected final PropertyChangeSupport state = new PropertyChangeSupport(this);
 
 	SaturationDegreeHeuristic(Semester semester) {
 		this.semester = semester;
@@ -58,6 +62,10 @@ class SaturationDegreeHeuristic {
 		sessionSessionConflicts = matrixCalculator.calcSessionSessionConflicts();
 		sessionRoomConflicts = matrixCalculator.calcSessionRoomConflicts();
 		teacherPeriodConflicts = matrixCalculator.calcTeacherPeriodConflicts();
+	}
+	
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		this.state.addPropertyChangeListener(listener);
 	}
 
 	/**
@@ -127,11 +135,10 @@ class SaturationDegreeHeuristic {
 			} else {
 				// If the heuristic failed at finding a feasible solution, the
 				// infeasible timetable is discarded and a new timetable is
-				// generated
-				if(i>0) {
-					i--;					
-				}
+				// generated			
 			}
+			//Notify about the number of generated timetables
+			state.firePropertyChange(new PropertyChangeEvent(this, null, null, i+1));
 		}
 
 		return generatedTimetables;

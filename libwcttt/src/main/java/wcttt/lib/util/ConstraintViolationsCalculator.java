@@ -253,8 +253,7 @@ public class ConstraintViolationsCalculator {
 				assignment.getSession().getCourse().getPracticals().size();
 		int numberOfCoursePracticalsInPeriod = 0;
 		
-		int counter = 0;
-		
+		int counter = 0;	
 		for (Curriculum curriculum : semester.getCurricula()) {
 			if (curriculum.getCourses().contains(
 					assignment.getSession().getCourse())) {

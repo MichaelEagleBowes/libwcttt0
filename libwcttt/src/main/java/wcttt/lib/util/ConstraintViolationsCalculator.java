@@ -254,6 +254,8 @@ public class ConstraintViolationsCalculator {
 				assignment.getSession().getCourse().getPracticals().size();
 		int numberOfCoursePracticalsInPeriod = 0;
 		
+		Course assignmentCourse = assignment.getSession().getCourse();
+		
 		int counter = 0;	
 		for (Curriculum curriculum : semester.getCurricula()) {
 			if (curriculum.getCourses().contains(
@@ -262,7 +264,7 @@ public class ConstraintViolationsCalculator {
 				for (TimetableAssignment otherAssignment : period.getAssignments()) {
 					//Check if all practicals of the assignment are in the same period
 					if (otherAssignment.getSession().getCourse().equals(
-							assignment.getSession().getCourse()) &&
+							assignmentCourse) &&
 							!assignment.getSession().isLecture()) {
 						numberOfCoursePracticalsInPeriod++;
 					}
@@ -270,14 +272,18 @@ public class ConstraintViolationsCalculator {
 					 * Curricular contains other course of an assignment in the selected period
 					 */
 					if (curriculum.getCourses().contains(otherAssignment.getSession().getCourse())) {
-						//The other assignment is a lecture or has only one practical.
-						if(otherAssignment.getSession().isLecture() ||
-								otherAssignment.getSession().getCourse()
-								.getPracticals().size() == 1 ||
-								otherAssignment.getSession().getCourse()
-								.equals(assignment.getSession().getCourse())){							
+						if(otherAssignment.getSession().isLecture()) {
+							//Other course is a lecture
 							counter++;
-						}
+						}else if(otherAssignment.getSession().getCourse()
+								.getPracticals().size() == 1 &&
+								assignmentCourse.getPracticals().size() == 1) {
+							//Both sessions are the only practicals of their course.
+							counter++;
+						}else if(otherAssignment.getSession().getCourse().equals(assignmentCourse)) {
+							//The other session is from the same course.
+							counter++;
+						}						
 					}
 				}
 			}

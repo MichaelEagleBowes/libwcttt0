@@ -22,6 +22,7 @@ public class ConstraintViolationsCalculatorTest {
 	private static Teacher teacher2;
 	private static Teacher teacher3;
 	private static Teacher teacher4;
+	private static Teacher teacher5;
 	private static Chair chair;
 	private static Course course1;
 	private static Course course2;
@@ -47,6 +48,10 @@ public class ConstraintViolationsCalculatorTest {
 	private static Session lecture4;
 	private static Session practical5;
 	
+	//No Curriculum and same teacher
+	private static Session lecture5;
+	private static Session lecture6;
+	
 	private static InternalRoom room1;
 	private static InternalRoom room2;
 	private static InternalRoom room3;
@@ -66,6 +71,7 @@ public class ConstraintViolationsCalculatorTest {
 			teacher2 = new Teacher("BBBBBBBBBB", "Willhelm");		
 			teacher3 = new Teacher("CCCCCCCCC", "Otto");			
 			teacher4 = new Teacher("DDDDDDDDDD", "Klaus");
+			teacher5 = new Teacher("DASDAAARER","Peter");
 			
 			chair.addTeacher(teacher1);
 			chair.addTeacher(teacher2);
@@ -164,6 +170,21 @@ public class ConstraintViolationsCalculatorTest {
 			cur2 = new Curriculum("FFFFFASDDDA", "Curriculum 2");
 			cur2.addCourse(course3);
 			cur2.addCourse(course4);
+			
+			lecture5 = new InternalSession();
+			lecture5.setCourse(course4);	
+			lecture5.setTeacher(teacher5);
+			lecture5.setId("KSSDFSDFSD");
+			lecture5.setName("Same Teacher V1");	
+			
+			lecture6 = new InternalSession();
+			lecture6.setCourse(course4);	
+			lecture6.setTeacher(teacher5);
+			lecture6.setId("IIIDASDASDS");
+			lecture6.setName("Same Teacher V2");	
+	
+			course4.addLecture(lecture5);
+			course4.addLecture(lecture6);
 			
 			room1 = new InternalRoom();
 			room1.setId("LLL1123");
@@ -558,27 +579,8 @@ public class ConstraintViolationsCalculatorTest {
 	void constraintH6Violation() {
 		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
 		assertNotNull(period);
-		InternalSession lecture5 = null;
-		InternalSession lecture6 = null;
 		boolean couldAssign = false;
-		try {			
-			Teacher teacher = new Teacher("DASDAAARER","Peter");
-			
-			lecture5 = new InternalSession();
-			lecture5.setCourse(course4);	
-			lecture5.setTeacher(teacher);
-			lecture5.setId("KLJFFSAFSD");
-			lecture5.setName("Same Teacher V1");	
-			
-			lecture6 = new InternalSession();
-			lecture6.setCourse(course4);	
-			lecture6.setTeacher(teacher);
-			lecture6.setId("KLJFZTFZTF");
-			lecture6.setName("Same Teacher V2");	
-	
-			course4.addLecture(lecture5);
-			course4.addLecture(lecture6);
-			
+		try {							
 			TimetableAssignment assignment1 = new TimetableAssignment();
 			assignment1.setRoom(room1);
 			assignment1.setSession(lecture5);
@@ -603,6 +605,39 @@ public class ConstraintViolationsCalculatorTest {
 			}
 		}
 		assertEquals(1, counter);
+	}
+	
+	@Test
+	void constraintH6NoViolation() {
+		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
+		assertNotNull(period);
+		boolean couldAssign = false;
+		try {			
+			TimetableAssignment assignment1 = new TimetableAssignment();
+			assignment1.setRoom(room1);
+			assignment1.setSession(lecture5);
+			period.addAssignment(assignment1);
+			
+			couldAssign= true;
+		} catch (WctttModelException e) {
+			System.err.println(e.getMessage());
+			couldAssign = false;
+		}
+		assertTrue(couldAssign);	
+		
+		TimetableAssignment assignment2 = new TimetableAssignment();
+		assignment2.setRoom(room2);
+		assignment2.setSession(lecture6);
+		TimetablePeriod nextPeriod = timetable.getDays().get(0).getPeriods().get(1);
+		List<ConstraintType> violations = cvc.calcAssignmentHardViolations(timetable, nextPeriod, assignment2);
+		//Check the number of violations
+		int counter = 0;
+		for(ConstraintType violation : violations) {
+			if(violation == ConstraintType.h6) {
+				counter++;
+			}
+		}
+		assertEquals(0, counter);
 	}
 	
 }

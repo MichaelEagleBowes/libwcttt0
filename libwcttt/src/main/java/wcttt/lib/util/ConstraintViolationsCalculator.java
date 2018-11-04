@@ -235,10 +235,8 @@ public class ConstraintViolationsCalculator {
 					//Check if course is contained in the curriculum
 					if (curriculum.getCourses().contains(otherAssignment.getSession().getCourse())) {
 						//If assignment is no lecture and has more than one practical it can be ignored.
-						if(!otherAssignment.getSession().isLecture()){
-							continue;
-						}else if(otherAssignment.getSession().getCourse().getPracticals().size() != 1) {
-							continue;
+						if(!otherAssignment.getSession().isLecture() && otherAssignment.getSession().getCourse().getPracticals().size() != 1){
+							continue;						
 						}else {
 							counter++;							
 						}

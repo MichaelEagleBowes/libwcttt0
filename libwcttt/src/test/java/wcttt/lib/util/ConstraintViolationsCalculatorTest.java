@@ -640,4 +640,70 @@ public class ConstraintViolationsCalculatorTest {
 		assertEquals(0, counter);
 	}
 	
+	@Test
+	void constraintH8Violation() {
+		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
+		assertNotNull(period);
+		boolean couldAssign = false;
+		try {			
+			TimetableAssignment assignment1 = new TimetableAssignment();
+			assignment1.setRoom(room1);
+			assignment1.setSession(lecture5);
+			period.addAssignment(assignment1);
+			
+			couldAssign= true;
+		} catch (WctttModelException e) {
+			System.err.println(e.getMessage());
+			couldAssign = false;
+		}
+		assertTrue(couldAssign);	
+		
+		TimetableAssignment assignment2 = new TimetableAssignment();
+		assignment2.setRoom(room2);
+		assignment2.setSession(lecture6);
+		TimetablePeriod nextPeriod = timetable.getDays().get(0).getPeriods().get(1);
+		List<ConstraintType> violations = cvc.calcAssignmentHardViolations(timetable, nextPeriod, assignment2);
+		//Check the number of violations
+		int counter = 0;
+		for(ConstraintType violation : violations) {
+			if(violation == ConstraintType.h8) {
+				counter++;
+			}
+		}
+		assertEquals(1, counter);
+	}
+	
+	@Test
+	void constraintH8NoViolation() {
+		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
+		assertNotNull(period);
+		boolean couldAssign = false;
+		try {			
+			TimetableAssignment assignment1 = new TimetableAssignment();
+			assignment1.setRoom(room1);
+			assignment1.setSession(lecture5);
+			period.addAssignment(assignment1);
+			
+			couldAssign= true;
+		} catch (WctttModelException e) {
+			System.err.println(e.getMessage());
+			couldAssign = false;
+		}
+		assertTrue(couldAssign);	
+		
+		TimetableAssignment assignment2 = new TimetableAssignment();
+		assignment2.setRoom(room2);
+		assignment2.setSession(lecture6);
+		TimetablePeriod nextPeriod = timetable.getDays().get(1).getPeriods().get(1);
+		List<ConstraintType> violations = cvc.calcAssignmentHardViolations(timetable, nextPeriod, assignment2);
+		//Check the number of violations
+		int counter = 0;
+		for(ConstraintType violation : violations) {
+			if(violation == ConstraintType.h8) {
+				counter++;
+			}
+		}
+		assertEquals(0, counter);
+	}
+	
 }

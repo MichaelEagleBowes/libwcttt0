@@ -151,7 +151,7 @@ public class ConstraintViolationsCalculatorTest {
 			
 			cur1 = new Curriculum("FFFAWWQQSDA", "Curriculum 1");
 			cur1.addCourse(course1);
-			cur1.addCourse(course2);			
+			cur1.addCourse(course2);	
 			
 			cur2 = new Curriculum("FFFFFASDDDA", "Curriculum 2");
 			cur2.addCourse(course3);
@@ -390,5 +390,62 @@ public class ConstraintViolationsCalculatorTest {
 		assertEquals(0, counter);
 	}
 	
+	@Test
+	void constraintH4SinglePracticalFound() {
+		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
+		assertNotNull(period);
+		boolean couldAssign = false;
+		try {
+			TimetableAssignment assignment1 = new TimetableAssignment();
+			assignment1.setRoom(room1);
+			assignment1.setSession(practical2);
+			period.addAssignment(assignment1);
+			couldAssign= true;
+		} catch (WctttModelException e) {
+			couldAssign = false;
+		}
+		assertTrue(couldAssign);
+		TimetableAssignment assignment2 = new TimetableAssignment();
+		assignment2.setRoom(room2);
+		assignment2.setSession(lecture1);
+		List<ConstraintType> violations = cvc.calcAssignmentHardViolations(timetable, period, assignment2);
+		//Check the number of violations
+		int counter = 0;
+		for(ConstraintType violation : violations) {
+			if(violation == ConstraintType.h4) {
+				counter++;
+			}
+		}
+		assertEquals(1, counter);
+	}
+	
+	@Test
+	void constraintH4MultiplePracticalNotFound() {
+		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
+		assertNotNull(period);
+		boolean couldAssign = false;
+		try {
+			TimetableAssignment assignment1 = new TimetableAssignment();
+			assignment1.setRoom(room1);
+			assignment1.setSession(practical4);
+			period.addAssignment(assignment1);
+			couldAssign= true;
+		} catch (WctttModelException e) {
+			couldAssign = false;
+		}
+		assertTrue(couldAssign);
+		TimetableAssignment assignment2 = new TimetableAssignment();
+		assignment2.setRoom(room2);
+		assignment2.setSession(lecture3);
+		List<ConstraintType> violations = cvc.calcAssignmentHardViolations(timetable, period, assignment2);
+		//Check the number of violations
+		int counter = 0;
+		for(ConstraintType violation : violations) {
+			if(violation == ConstraintType.h4) {
+				counter++;
+			}
+		}
+		assertEquals(0, counter);
+	}
 	
 }

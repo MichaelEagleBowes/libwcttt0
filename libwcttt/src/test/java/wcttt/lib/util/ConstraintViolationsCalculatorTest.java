@@ -184,8 +184,7 @@ public class ConstraintViolationsCalculatorTest {
 			semester.addInternalRoom(room4);
 			cvc = new ConstraintViolationsCalculator(semester);
 			
-		}catch(WctttModelException e) {
-				
+		}catch(WctttModelException e) {			
 			System.err.println(e.getMessage());
 			semester = null;
 		}				
@@ -212,7 +211,7 @@ public class ConstraintViolationsCalculatorTest {
 	}
 	
 	@Test
-	void constraintH1() {
+	void constraintH1Found() {
 		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
 		assertNotNull(period);
 		try {
@@ -235,6 +234,34 @@ public class ConstraintViolationsCalculatorTest {
 				counter++;
 			}
 		}
-		assertEquals(counter,1);
+		assertEquals(1, counter);
+	}
+	
+	@Test
+	void constraintH1NotFound() {
+		TimetablePeriod period = timetable.getDays().get(0).getPeriods().get(0);
+		assertNotNull(period);
+		try {
+			TimetableAssignment assignment1 = new TimetableAssignment();
+			assignment1.setRoom(room1);
+			assignment1.setSession(lecture1);
+			period.addAssignment(assignment1);
+		} catch (WctttModelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		TimetableAssignment assignment2 = new TimetableAssignment();
+		assignment2.setRoom(room2);
+		assignment2.setSession(practical1);
+		TimetablePeriod nextPeriod = timetable.getDays().get(0).getPeriods().get(1);
+		List<ConstraintType> violations = cvc.calcAssignmentHardViolations(timetable, nextPeriod, assignment2);
+		//Check the number of violations
+		int counter = 0;
+		for(ConstraintType violation : violations) {
+			if(violation == ConstraintType.h1) {
+				counter++;
+			}
+		}
+		assertEquals(0, counter);
 	}
 }
